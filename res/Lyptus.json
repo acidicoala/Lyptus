@@ -1,0 +1,11 @@
+{
+  "logging": true,
+  "patches": [
+    {
+      "name": "Force unconditional jump",
+      "pattern": "ABC??123",
+      "offset": 0,
+      "replacement": "EB"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+[submodule "KoalaBox"]
+	path = KoalaBox
+	url = https://github.com/acidicoala/KoalaBox.git
+[submodule "vcpkg"]
+	path = vcpkg
+	url = https://github.com/microsoft/vcpkg.git
