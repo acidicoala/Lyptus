@@ -60,7 +60,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Lyptus-${{ matrix.arch }}
-          path: ${{ env.BUILD_DIR }}\Release\Lyptus.dll
+          path: ${{ env.BUILD_DIR }}\Release\Lyptus*.dll
 
   package-project:
     name: Package the artifacts into a release zip
@@ -93,7 +93,7 @@ jobs:
       - name: Make release zip
         run: >
           zip -j Lyptus-${{ env.VERSION_TAG }}.zip
-          artifacts/*-Release/*.dll
+          artifacts/Lyptus*/*.dll
           res/Lyptus.json
 
       - name: Create a release draft

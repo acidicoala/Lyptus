@@ -59,6 +59,13 @@ add_library(
         ${GEN_DIR}/version.rc
 )
 
+math(EXPR BITS "8*${CMAKE_SIZEOF_VOID_P}")
+set_target_properties(
+        ${CMAKE_PROJECT_NAME}
+        PROPERTIES
+        RUNTIME_OUTPUT_NAME "Lyptus${BITS}"
+)
+
 target_include_directories(
         ${CMAKE_PROJECT_NAME} PRIVATE
         ${SRC_DIR}
