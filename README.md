@@ -16,7 +16,7 @@ conforms to the standard JSON format. The description of each available option i
 * `logging`: Enables or disables logging into a `Koaloader.log` file. Possible values: `true`, `false` (default).
 * `patches`: An array of objects that describe patches that will be applied in the order they were defined. Each object has the following properties:
   * `name`: A string that informally describes the patch. 
-  * `pattern`: A hexadecimal string that specifies the pattern Lyptus will use when searching. The string can contain only hex symbols [0-9][A-F][a-f], whitespaces, and wildcards [?]. Keep in mind that 2 hex symbols constitute 1 byte, hence the string must have an even number of characters.
+  * `pattern`: A hexadecimal string that specifies the pattern Lyptus will use when searching. The string can contain only hex symbols [0-9][A-F][a-f], whitespaces [ ], and wildcards [?]. Keep in mind that 2 hex symbols constitute 1 byte, hence the string must have an even number of characters.
   * `offset`: A byte offset that will be added to the found address when applying the patch.
   * `replacement`: A hexadecimal string that specifies a sequence of bytes to be written at the target address. The string can contain only hex symbols [0-9][A-F][a-f].
 

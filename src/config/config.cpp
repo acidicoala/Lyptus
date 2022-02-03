@@ -25,11 +25,10 @@ namespace config {
         std::set<char> valid_replacement_chars{
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
             'A', 'B', 'C', 'D', 'E', 'F', 'a', 'b', 'c', 'd', 'e', 'f',
-            '?', ' ', '\t'
         };
 
         std::set<char> valid_pattern_chars(valid_replacement_chars);
-        valid_pattern_chars.insert({ '?', ' ', '\t' });
+        valid_pattern_chars.insert({ '?', ' ' });
 
         for (const auto& patch: config.patches) {
             if (not contains_only(patch.pattern, valid_pattern_chars)) {
@@ -39,7 +38,7 @@ namespace config {
                 ));
             }
 
-            if (not contains_only(patch.pattern, valid_replacement_chars)) {
+            if (not contains_only(patch.replacement, valid_replacement_chars)) {
                 fatal_crash(fmt::format(
                     "Patch '{}' contains invalid replacement: '{}'",
                     patch.name, patch.replacement
