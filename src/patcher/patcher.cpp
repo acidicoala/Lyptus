@@ -1,7 +1,7 @@
 #include "patcher.hpp"
-#include "util/util.hpp"
-#include "logger/logger.hpp"
-#include "win_util/win_util.hpp"
+#include "koalabox/util/util.hpp"
+#include "koalabox/logger/logger.hpp"
+#include "koalabox/win_util/win_util.hpp"
 
 #include <regex>
 #include <utility>

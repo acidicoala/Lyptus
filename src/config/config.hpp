@@ -1,6 +1,6 @@
 #pragma once
 
-#include "koalabox.hpp"
+#include "koalabox/koalabox.hpp"
 
 #include <nlohmann/json.hpp>
 

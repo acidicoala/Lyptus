@@ -1,9 +1,9 @@
 #include "lyptus.hpp"
 #include "config/config.hpp"
-#include "logger/logger.hpp"
 #include "patcher/patcher.hpp"
-#include "util/util.hpp"
-#include "win_util/win_util.hpp"
+#include "koalabox/logger/logger.hpp"
+#include "koalabox/util/util.hpp"
+#include "koalabox/win_util/win_util.hpp"
 #include "build_config.h"
 
 using namespace koalabox;
@@ -30,7 +30,7 @@ void lyptus::init(HMODULE self_module) {
         if (address == nullptr) {
             continue;
         }
-        
+
         patcher::patch_memory(address, patch);
 
         logger::info("🍀 Patch '{}' was successfully applied", patch.name);
