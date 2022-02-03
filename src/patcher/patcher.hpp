@@ -1,11 +1,12 @@
 #pragma once
 
 #include "koalabox.hpp"
+#include "config/config.hpp"
 
 namespace patcher {
 
-    using namespace koalabox;
+    char* find_pattern_address(MODULEINFO process_info, const config::Patch& patch);
 
-    char* scan(PCSTR pMemory, size_t length, String pattern);
+    void patch_memory(char* address, const config::Patch& patch);
 
 }
