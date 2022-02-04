@@ -11,6 +11,8 @@ using namespace koalabox;
 void lyptus::init(HMODULE self_module) {
     DisableThreadLibraryCalls(self_module);
 
+    koalabox::project_name = "Lyptus";
+
     const auto self_directory = util::get_module_dir(self_module);
 
     const auto config = config::read(self_directory / "Lyptus.json");
