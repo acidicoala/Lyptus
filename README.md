@@ -8,6 +8,8 @@ Set up the Lyptus config with a list of patches to apply, and inject the Lyptus 
 
 [Koaloader]: https://github.com/acidicoala/Koaloader
 
+[Official forum topic](https://cs.rin.ru/forum/viewtopic.php?p=2536753#p2536753)
+
 ## ⚙ Configuration
 
 Lyptus comes with a configuration file `Lyptus.json`, which defines patches that will be applied as soon as Lyptus gets injected into the process. The config file
