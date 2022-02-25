@@ -1,12 +1,13 @@
 #pragma once
 
-#include "koalabox/koalabox.hpp"
-#include "config/config.hpp"
+#include "lyptus/lyptus.hpp"
 
 namespace patcher {
 
-    char* find_pattern_address(MODULEINFO process_info, const config::Patch& patch);
+    using namespace lyptus;
 
-    void patch_memory(char* address, const config::Patch& patch);
+    char* find_pattern_address(const MODULEINFO& process_info, const Patch& patch);
+
+    void patch_memory(char* address, const Patch& patch);
 
 }

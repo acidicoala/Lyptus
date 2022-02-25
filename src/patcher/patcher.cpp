@@ -1,10 +1,7 @@
 #include "patcher.hpp"
 #include "koalabox/util/util.hpp"
-#include "koalabox/logger/logger.hpp"
 #include "koalabox/win_util/win_util.hpp"
 
-#include <regex>
-#include <utility>
 #include <chrono>
 #include <cstring>
 
@@ -109,7 +106,7 @@ unsigned char* hex_str_to_bytes(const char* hex_str) {
     return data;
 }
 
-char* patcher::find_pattern_address(MODULEINFO process_info, const config::Patch& patch) {
+char* patcher::find_pattern_address(const MODULEINFO& process_info, const Patch& patch) {
     const auto t1 = std::chrono::high_resolution_clock::now();
     const auto address = scan_internal(
         static_cast<PCSTR>(process_info.lpBaseOfDll),
@@ -121,13 +118,13 @@ char* patcher::find_pattern_address(MODULEINFO process_info, const config::Patch
     const double elapsedTime = std::chrono::duration<double, std::milli>(t2 - t1).count();
 
     if (address == nullptr) {
-        logger::error(
+        logger->error(
             "Failed to find address of '{}'. Search time: {:.2f} ms",
             patch.name,
             elapsedTime
         );
     } else {
-        logger::debug(
+        logger->debug(
             "'{}' address: {}. Search time: {:.2f} ms",
             patch.name,
             fmt::ptr(address),
@@ -138,8 +135,9 @@ char* patcher::find_pattern_address(MODULEINFO process_info, const config::Patch
     return address;
 }
 
-void patcher::patch_memory(char* address, const config::Patch& patch) {
-    auto bytes = hex_str_to_bytes(patch.replacement.c_str());
+void patcher::patch_memory(char* address, const Patch& patch) {
+    const auto replacement = std::regex_replace(patch.replacement, std::regex("\\s+"), "");
+    auto bytes = hex_str_to_bytes(replacement.c_str());
 
     win_util::write_process_memory(
         ::GetCurrentProcess(),

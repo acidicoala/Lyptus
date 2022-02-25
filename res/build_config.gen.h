@@ -1,4 +1,0 @@
-#pragma once
-
-#define PROJECT_VERSION "${PROJECT_VERSION_SHORT}${VERSION_SUFFIX}"
-
