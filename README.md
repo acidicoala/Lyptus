@@ -20,7 +20,9 @@ conforms to the standard JSON format. The description of each available option i
   * `name`: A string that informally describes the patch. 
   * `pattern`: A hexadecimal string that specifies the pattern Lyptus will use when searching. The string can contain only hex symbols [0-9][A-F][a-f], whitespaces [ ], and wildcards [?]. Keep in mind that 2 hex symbols constitute 1 byte, hence the string must have an even number of characters.
   * `offset`: A byte offset that will be added to the found address when applying the patch.
-  * `replacement`: A hexadecimal string that specifies a sequence of bytes to be written at the target address. The string can contain only hex symbols [0-9][A-F][a-f].
+  * `replacement`: A hexadecimal string that specifies a sequence of bytes to be written at the target address. The string can contain only hex symbols [0-9][A-F][a-f], and whitespaces [ ].
+  * `enabled`: A boolean field which enables or disables the patch
+  * `required`: A boolean field which determines if Lyptus should crash when a pattern for a given patch is not found or proceed to the next patch.
 
 ## 👋 Acknowledgements
 

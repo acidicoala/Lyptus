@@ -5,7 +5,9 @@
       "name": "Force unconditional jump",
       "pattern": "ABC??123",
       "offset": 0,
-      "replacement": "EB"
+      "replacement": "EB",
+      "enabled": true,
+      "required": false
     }
   ]
 }

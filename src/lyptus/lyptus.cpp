@@ -13,7 +13,7 @@ namespace lyptus {
     Config config = {}; // NOLINT(cert-err58-cpp)
 
     void validate_config() {
-        const auto contains_only = [](const String& string, const std::set<char>& whitelist) {
+        const auto contains_only = [](const String& string, const Set<char>& whitelist) {
             return std::ranges::all_of(string.begin(), string.end(),
                 [&](char symbol) {
                     return whitelist.contains(symbol);
@@ -21,12 +21,12 @@ namespace lyptus {
             );
         };
 
-        std::set<char> valid_replacement_chars{
+        Set<char> valid_replacement_chars{
             ' ', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
             'A', 'B', 'C', 'D', 'E', 'F', 'a', 'b', 'c', 'd', 'e', 'f',
         };
 
-        std::set<char> valid_pattern_chars(valid_replacement_chars);
+        Set<char> valid_pattern_chars(valid_replacement_chars);
         valid_pattern_chars.insert({ '?' });
 
         for (const auto& patch: config.patches) {
@@ -45,7 +45,7 @@ namespace lyptus {
 
         const auto self_directory = loader::get_module_dir(self_module);
 
-        config = config_parser::parse<Config>(self_directory / PROJECT_NAME".jsonc");
+        config = config_parser::parse<Config>(self_directory / PROJECT_NAME".json");
 
         validate_config();
 
@@ -59,11 +59,18 @@ namespace lyptus {
         const auto process_info = win_util::get_module_info(process_handle);
 
         for (const auto& patch: config.patches) {
+            if (not patch.enabled) {
+                continue;
+            }
+
             const auto address = patcher::find_pattern_address(process_info, patch);
 
-            // TODO: Check required
             if (address == nullptr) {
-                continue;
+                if (patch.required) {
+                    util::panic("Pattern for required patch '{}' was not found", patch.name);
+                } else {
+                    continue;
+                }
             }
 
             patcher::patch_memory(address, patch);
