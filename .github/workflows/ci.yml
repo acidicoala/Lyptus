@@ -12,6 +12,6 @@ jobs:
         ["Lyptus"]
 
       zip_command: >
-        zip -j Lyptus-${{ env.VERSION_TAG }}.zip
+        zip -j $ZIP_NAME
         artifacts/*/*.dll
         res/Lyptus.json
